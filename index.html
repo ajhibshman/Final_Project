@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    
+
+    <title>Snow Model </title>
+       
+  </head>
+<body class="viz">
+
+<div class="jumbotron">
+    <h1>Predicting Precipitation at Loveland Ski Area</h1>
+    <h1>With Machine Learning</h1>
+    <hr>  
+    <h3>Data Analytics and Visualization Boot Camp, University of Denver</h3>
+    <h3>AJ Hibshman March 10, 2021</h3>
+</div>
+
+<br>
+
+<div class="container">
+    <div class="row">
+        <div class="col col-md-12">
+            <section id="main-viz">
+                <h2 >Overview</h2> 
+                <hr class="hr">
+        
+                <p class=>In this project, I will be revisiting a topic earlier in the course, prediction snowfall.   This time 
+            around I will be attampting to accurately predict the probability of precipitation at 
+            Loveland Ski Area 1,3 and 5 days into the future utilizing machine learning algorithms.
+                  <br>
+                  My hope is to be able to use hyper local data to be able to better predict precipitation, and to
+                  ulitmately the odds of snowfall occuring in time to plan for a powder day.
+                </p>
+            </section>          
+        </div>
+    </div>
+</div>
+
+<br>
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col col-md-12">
+            <section id="main-viz">
+                <h2 >Obtaining Data</h2> 
+                <hr class="hr">
+        
+                <p class=>I examined numerous potential sources of data to train my weather Predicting
+                    models.  Based on my anecdotal experience, I suspected that wind (particularly directions)
+                    and barometric pressure could play a crucial role in prediction.  
+                    Suprisingly, historical baromotric presssure data was exceedingly difficult to find.
+                    <br>
+                    <br>
+                    Ultimately I decided to turn back to the same source of data I used in my first attempt
+                    at snowfall prediction, the Snotel network of automated weather stations.
+                    <br><br>
+                    I utilized the report generator at https://wcc.sc.egov.usda.gov/reportGenerator/ 
+                    to select all snotel stations over an elevation of 7,000 feet above sea level.
+                    I created a CSV file of daily precipitation increments from October 1st, 2001
+                    Until March 1st 2021 for 504 individual weather stations across the western United States.
+                    <br><br>
+                </p>
+                <h2>Data exploration and preparation</h2>
+                <p>
+                    I began by preparing my target data.  Daily precipitation increments from the target location were offset by 1,3 and 5 days to allow for
+                    forecasting and then encoded as a 1 (precipitated) or 0.
+                    I then merged the snotel data on date.
+                    <br><br>
+                    I then created a second dataframe with station metadata, including latitude and longitude and ran the correlation between each stations daily precipitation (or not)
+                    and the 1 day offset target result.  
+                </p>
+                <img src="images/correlation.png" alt="station correlation">
+                <p>
+                    I then used plotly to plot the location of each station, along with correlation represented with color and size. (below visualization is interactive)
+                </p>
+                <iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src="day1.html" height="525" width="100%"></iframe>
+                <p>The highest correlation to a 1 day forecast occur in mainly in Colorado and Utah
+                    With such large overlap I then deleted all stations with missing data reducing the set to 209 stations with complete records.
+                    <br><br>
+                    Finally I merged the closest full automated weatherstation to the target, Soda Creek RAWS station to get additional weather data such as Wind speed, direction, solar radiation, 
+                    relative humidity temperature and day of year (for seasonal corrrelation)
+                </p>
+                
+
+        
+        
+            </section>          
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+  <br>
+    <div class = "row">
+        
+        <div class="col col-md-12">
+            <section id="main-viz">
+            <h1 >Latitude vs. Max. Temperature</h1> 
+            <hr>
+            <img id="viz-image" src="images/lat_vs_temp.png" alt="lat vs temp">
+            <p class=>The data set showed a clear correlation between latitude and temperature observed (r-value :
+                ). Not included in the study is seasonal impact.  
+                The date of data was October - Fall in the northern hemisphere and spring in the southern.
+            </p>
+            
+            
+            </section>          
+        </div>
+    
+        
+        <div class="col col md-1"></div>
+
+    </div>
+
+</div>
+
+<br>
+<div id="footer-viz">
+    <p> &#169; Copyright 2021 AJ Hibshman. All Rights Reserved.</p>
+</div> 
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+</body>
+</html>
