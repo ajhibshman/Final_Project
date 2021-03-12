@@ -23,7 +23,7 @@
     <h3>AJ Hibshman March 10, 2021</h3>
 </div>
 
-<br>
+<br><br><br><br>
 
 <div class="container">
     <div class="row">
@@ -44,7 +44,7 @@
     </div>
 </div>
 
-<br>
+<br><br><br><br>
 
 
 
@@ -69,12 +69,16 @@
                     I created a CSV file of daily precipitation increments from October 1st, 2001
                     Until March 1st 2021 for 504 individual weather stations across the western United States.
                     <br><br>
+                    My attempt then became to predict probability of precipitation (ppp) of a specific point based on historical 
+                    relationships amongst western US mountain ranges.
                 </p>
                 <h2>Data exploration and preparation</h2>
                 <p>
                     I began by preparing my target data.  Daily precipitation increments from the target location were offset by 1,3 and 5 days to allow for
                     forecasting and then encoded as a 1 (precipitated) or 0.
-                    I then merged the snotel data on date.
+                    <img src="images/target.png" alt="target">
+                    <br>
+                    I then merged the snotel precipitation data on date.
                     <br><br>
                     I then created a second dataframe with station metadata, including latitude and longitude and ran the correlation between each stations daily precipitation (or not)
                     and the 1 day offset target result.  
@@ -99,31 +103,91 @@
     </div>
 </div>
 
+<br><br><br><br>
 
 <div class="container">
-  <br>
-    <div class = "row">
-        
+    <div class="row">
         <div class="col col-md-12">
             <section id="main-viz">
-            <h1 >Latitude vs. Max. Temperature</h1> 
-            <hr>
-            <img id="viz-image" src="images/lat_vs_temp.png" alt="lat vs temp">
-            <p class=>The data set showed a clear correlation between latitude and temperature observed (r-value :
-                ). Not included in the study is seasonal impact.  
-                The date of data was October - Fall in the northern hemisphere and spring in the southern.
-            </p>
-            
-            
+                <h2 >Modeling 1 day forecast</h2> 
+                <hr class="hr">
+        
+                <p class=>
+                  I ran my feature and target data through numerous models from sci Kit Learn and Tensorflow.
+                   as outlined in the below table and summary results:
+                        <br><br>
+                  -- insert -- 
+                        <br><br>
+                    <ul>
+                        <li>
+                            1)Multi Regression Model - This model did of course not yield good results due to the categorical nature of the
+                            binary target.  This may be of more help in determining other weather metrics such as temperature.
+                         </li>
+                        <li>2) KNN Model- this worked fairly well, achieving .71 Accuracy.  It gave the target precipitation probablility.
+                            as 29%, accurately predicting no precipitation.
+                        </li>
+
+
+                  
+                </p>
             </section>          
         </div>
-    
-        
-        <div class="col col md-1"></div>
-
     </div>
-
 </div>
+
+<br><br><br><br>
+
+<div class="container">
+    <div class="row">
+        <div class="col col-md-12">
+            <section id="main-viz">
+                <h2 >Analysis & Musings</h2> 
+                <hr class="hr">
+        
+                <p class=>
+                    Overall performance of the 1 day forecast was reasonable. All of the models correctly predicted no precipitation, some with 
+                    high probability.  Summing up the percentage od days in the dataset that had precipitation 
+                    was 3205 days out of 7093, or 45% percent of the time.  So one could always predict no precipitation and be correct 55% of the time.
+                    
+                    <br><br>
+                    
+                    There are numerous ways to modify this algorythym to provide better accuracy.  Top on the list is 
+                    more meaningful and complete raw data, including barometric pressure and wind speed/ direction.  Or to go in a different direction.
+                    I could start with data from existing weather models and then lay on hyper local feature data. 
+
+                    <br><br>
+
+                    I could also work more on the existing data- for example the difference in wind direction between 359 and 1 degree is not a meaningful difference. 
+                    however taking wind speed and direction and converting them into u and v vectors would potentially help increase accuracy. 
+                    Similarly I could make the day of year into a more seasonally representative feature.
+
+                    <br><br>
+
+                    automate data pipeline and publish predictions.
+
+                </p>
+            </section>          
+        </div>
+    </div>
+</div>
+
+<br>  
+<div class="container">
+    <div class="row">
+        <div class="col col-md-12">
+            <section id="main-viz">
+                <h2 >Background Image</h2> 
+                <hr class="hr">
+        
+                <p class=>Background image is the view from the top of Loveland Ski Area  
+                    as rendered by an AI imaging app.
+                </p>
+            </section>          
+        </div>
+    </div>
+</div>
+        
+<br><br><br><br>      
 
 <br>
 <div id="footer-viz">
