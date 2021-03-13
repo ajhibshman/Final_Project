@@ -70,20 +70,21 @@
                     Until March 1st 2021 for 504 individual weather stations across the western United States.
                     <br><br>
                     My attempt then became to predict probability of precipitation (ppp) of a specific point based on historical 
-                    relationships amongst western US mountain ranges.
+                    relationships amongst western US mountain ranges.  (At the target location, Loveland Ski Area, it is to be assumed 
+                    precipitation that falls between October and May/June (or possibly another month) will be in the form of sweet Colorado powder, ot atleast heavy spring snow. )
                 </p>
                 <h2>Data exploration and preparation</h2>
                 <p>
                     I began by preparing my target data.  Daily precipitation increments from the target location were offset by 1,3 and 5 days to allow for
                     forecasting and then encoded as a 1 (precipitated) or 0.
-                    <img src="images/target.png" alt="target">
+                    <img src="images/target.PNG" alt="target">
                     <br>
                     I then merged the snotel precipitation data on date.
                     <br><br>
                     I then created a second dataframe with station metadata, including latitude and longitude and ran the correlation between each stations daily precipitation (or not)
                     and the 1 day offset target result.  
                 </p>
-                <img src="images/correlation.png" alt="station correlation">
+                <img src="images/correlation.PNG" alt="station correlation">
                 <p>
                     I then used plotly to plot the location of each station, along with correlation represented with color and size. (below visualization is interactive)
                 </p>
@@ -116,7 +117,8 @@
                   I ran my feature and target data through numerous models from sci Kit Learn and Tensorflow.
                    as outlined in the below table and summary results:
                         <br><br>
-                  -- insert -- 
+                  
+                  <img src="images/actual.PNG" alt="actuals">
                         <br><br>
                     <ul>
                         <li>
@@ -126,7 +128,11 @@
                         <li>2) KNN Model- this worked fairly well, achieving .71 Accuracy.  It gave the target precipitation probablility.
                             as 29%, accurately predicting no precipitation.
                         </li>
-
+                        <li>3) Descision Tree- This model had predisction accuracy of .626
+                        </li>
+                        <li>4) Random Forest - This model narrowly beat out K nearest neighbor as highest accuracy at .73.  It correctly predicted no precipitation for the target at an 18% probability</li>
+                        <li>5) SVM- slightly lower accuracy at .663</li>
+                        <li>6) Deep Learning- Accuracy of .67</li>
 
                   
                 </p>
@@ -141,12 +147,40 @@
     <div class="row">
         <div class="col col-md-12">
             <section id="main-viz">
+                <h2 >3 and 5 day Forecast Models</h2> 
+                <hr class="hr">
+        
+                <p class=>
+
+                    After completing my initial look at a 1 day offset forecast I explored the 3 and 5 day data. </p>
+                    <br><br>
+                    <h3>3 Day Forecast:</h3>
+                    <iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src="day3.html" height="525" width="100%"></iframe>  
+                    <p>Overall correlations were much lower and more spread out geographically than observed for the 1 day forecast. 
+                    <br>
+                    Model Performance was also lower than the 1 day forecast.  I ran the random forest algorythym on this data at an accuracy of .636  giving a 21% chance of precipitation   
+                      </p>
+                    <br><br>
+                    <h3>5 day Forecast</h3>
+                    <iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src="day5.html" height="525" width="100%"></iframe> 
+                    <p> correlations for the 5 day forecast were even lower, though tended to be highest in the Sierra Nevada Mountains of California.</p>
+                    <p> Model performance slightly worse than 3 day at .61 accuracy.  Model is likely settling in on the overall chance of precipitation and possible seasonality or temperature.</p>
+
+            </section>          
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col col-md-12">
+            <section id="main-viz">
                 <h2 >Analysis & Musings</h2> 
                 <hr class="hr">
         
                 <p class=>
                     Overall performance of the 1 day forecast was reasonable. All of the models correctly predicted no precipitation, some with 
-                    high probability.  Summing up the percentage od days in the dataset that had precipitation 
+                    high probability.  Logistic regression models appeared to have the best performance.  As a measurement baseline, the percentage of days in the dataset that had precipitation 
                     was 3205 days out of 7093, or 45% percent of the time.  So one could always predict no precipitation and be correct 55% of the time.
                     
                     <br><br>

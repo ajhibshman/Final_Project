@@ -32,7 +32,10 @@ h3 {
     color:white;
     text-align: center;
   }
+li {
+  color:white;
 
+}
 
 /* Selecting elements by class */
 
